@@ -1,3 +1,7 @@
+// _.last() to _.invoke() of Underbar (2-4 hours): A fun project that has you reimplementing 
+// powerful & useful helper functions from the widely used Underscore.js library
+
+
 var _ = {};
 
 (function() {
@@ -5,6 +9,19 @@ var _ = {};
   // Return an array of the last n elements of an array. If n is undefined,
   // return just the last element.
   _.last = function(array, n) {
+    var leng = array.length,
+        pop, slice, val; 
+
+      if(n === 0) {
+        val = [];
+      } else if(n > leng) {
+        val = array;
+      } else if(n !== undefined) {
+        val = array.slice(n-1, leng);
+      } else {
+        val = array.pop();
+      }
+      return val;
   };
 
   // Like last, but for the first elements
