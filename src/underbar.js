@@ -9,19 +9,31 @@ var _ = {};
   // Return an array of the last n elements of an array. If n is undefined,
   // return just the last element.
   _.last = function(array, n) {
-    var leng = array.length,
-        pop, slice, val; 
 
-      if(n === 0) {
-        val = [];
-      } else if(n > leng) {
-        val = array;
-      } else if(n !== undefined) {
-        val = array.slice(n-1, leng);
-      } else {
-        val = array.pop();
-      }
-      return val;
+    var leng = array.length,
+        args;
+
+    if(n === undefined) {
+      // should pull the last element from an array
+      return array.pop();
+
+    } else if(n === 0) { 
+      // should return nothing if zero is passed in as the index
+      return [];
+
+    } else if( n > leng ) { 
+      // should return all the array's elements if the index argument is larger than the length of the array
+      return array;
+
+    } else { 
+      // should accept an index argument
+      // should work on an arguments object
+
+      // object arguments are not really an array. need to convert to array.
+      args = [].slice.call(array); 
+
+      return args.slice(length-n, leng);
+    } 
   };
 
   // Like last, but for the first elements
