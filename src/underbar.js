@@ -176,14 +176,11 @@ var _ = {};
 
   // Calls the method named by methodName on each value in the list.
   _.invoke = function(list, methodName) {
-    var newArr = [],
-        arr, i, j;
+    var newArr = [];
 
-    if(methodName === 'sort'){
-      _.each(list, function(i){
-          newArr[newArr.length] = i.sort();
-      });
-    }
+    _.each(list, function(i){
+        newArr[newArr.length] = i[methodName]();
+    });
 
     return newArr;
   };
