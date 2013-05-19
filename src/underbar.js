@@ -29,7 +29,7 @@ var _ = {};
       // should accept an index argument
       // should work on an arguments object
 
-      // object arguments are not really an array. need to convert to array.
+      // object arguments are not really an array, need to convert to array.
       args = [].slice.call(array); 
 
       return args.slice(length-n, leng);
@@ -38,13 +38,29 @@ var _ = {};
 
   // Like last, but for the first elements
   _.first = function(array, n) {
-    // TIP: you can often re-use similar functions in clever ways, like so:
-    return _.last(array.reverse(), n);
+    var args;
+
+    if(n && n > 0) {
+      // object arguments are not really an array. need to convert to array.
+      args = [].slice.call(array);
+      return args.slice(0, n);
+
+    } else {
+      // TIP: you can often re-use similar functions in clever ways, like so:
+      return _.last(array.reverse(), n);
+   }
   };
 
 
   // Call iterator(value, key, collection) for each element of collection
   _.each = function(obj, iterator) {
+    var array = [];
+
+    for(var i = 0; i<obj.length; i++){
+      array.push( iterator(obj[i], i, obj) );
+    }
+
+    return array;
   };
 
   /*
@@ -69,18 +85,62 @@ var _ = {};
 
   // Return all elements of an array that pass a truth test.
   _.filter = function(collection, iterator) {
+    var arrEven = [],
+        arrOdd = [];
+
+    _.each(collection, function(iterator){
+      if( iterator % 2 === 0) {
+        arrEven.push(iterator);
+      } else {
+        arrOdd.push(iterator);
+      }
+    });
+
+    if(iterator(collection[iterator]) === true) {
+      return arrOdd;
+    } else {
+      return arrEven;
+    }
   };
 
   // Return all elements of an array that don't pass a truth test.
   _.reject = function(collection, iterator) {
     // TIP: see if you can re-use _.select() here, without simply
     // copying code in and modifying it
+
+    var items =  _.filter(collection, iterator),
+        leng = collection.length-1;
+
+    _.each(items, function(iterator){
+        collection.splice(_.indexOf(collection, iterator), 1);
+    });
+
+    return collection;
+
   };
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
-  };
+    var newArr=[],
+        row = 0,
+        pass = 1;
 
+    _.each(array, function(i){
+
+      _.each(newArr, function(j){
+        pass = (i === j) ? 0 : pass;
+      });
+
+      if(pass === 1){
+        newArr.push(i);
+      }
+      row++
+      pass = 1;
+
+    });
+
+    return newArr;
+  };
 
   /*
    * map() is a useful primitive iteration function that works a lot
@@ -90,6 +150,13 @@ var _ = {};
 
   // Return the results of applying an iterator to each element.
   _.map = function(array, iterator) {
+    var newArr = [];
+
+    _.each(array, function(val, key, arr) {
+      newArr.push( iterator.call(this, val, key, arr) );
+    });
+
+    return newArr;
   };
 
   /*
@@ -109,6 +176,16 @@ var _ = {};
 
   // Calls the method named by methodName on each value in the list.
   _.invoke = function(list, methodName) {
+    var newArr = [],
+        arr, i, j;
+
+    if(methodName === 'sort'){
+      _.each(list, function(i){
+          newArr[newArr.length] = i.sort();
+      });
+    }
+
+    return newArr;
   };
 
   // Reduces an array or object to a single value by repetitively calling
