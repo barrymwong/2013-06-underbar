@@ -56,8 +56,18 @@ var _ = {};
   _.each = function(obj, iterator) {
     var array = [];
 
-    for(var i = 0; i<obj.length; i++){
-      array.push( iterator(obj[i], i, obj) );
+    if(typeof obj.length === 'number'){
+      for(var i = 0; i<obj.length; i++){
+        // append to array: val, key, collection
+        array.push( iterator(obj[i], i, obj) ); 
+      }
+
+    } else {
+      for( var key in obj) {
+        // object
+        array.push( iterator(obj[key], key, obj) ); 
+      }
+
     }
 
     return array;
@@ -90,9 +100,13 @@ var _ = {};
 
     _.each(collection, function(iterator){
       if( iterator % 2 === 0) {
+        //append to even array
         arrEven.push(iterator);
+
       } else {
+        //append to odd array
         arrOdd.push(iterator);
+        
       }
     });
 
