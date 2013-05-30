@@ -213,24 +213,57 @@ var _ = {};
   //   }, 0); // should be 6
   //
   _.reduce = function(obj, iterator, initialValue) {
+    var result = 0;
+
+    if(initialValue === undefined){
+      // set value to zero if undefined
+      initialValue = 0;
+    }
+
+    // stores result of last loop
+    result = initialValue;
+
+    _.each(obj, function(i){
+
+      //console.log(obj + ' | ' + i);
+
+      result = iterator(result, i);
+    });
+
+    return result;
   };
+
+
 
   // Determine if the array or object contains a given value (using `===`).
   _.contains = function(collection, target) {
     // TIP: A lot of iteration problems can be most easily expressed in
     // terms of reduce(). Here's a freebie to demonstrate!
     return _.reduce(collection, function(wasFound, item){
+
       if(wasFound){
         return true;
       }
       return item === target;
+
     }, false);
+
   };
 
 
   // Determine whether all of the elements match a truth test.
   _.every = function(obj, iterator) {
     // TIP: use reduce on this one!
+    var result = _.reduce(obj, function(boo, num){
+
+        if( iterator(num) != boo ) { // don't using !== for 1 equal to boolean true
+          return false;
+        }
+        return boo;
+
+    }, true); // initialValue = true
+
+    return result;
   };
 
   // Determine whether any of the elements pass a truth test. If no iterator is
