@@ -256,7 +256,7 @@ var _ = {};
     // TIP: use reduce on this one!
     var result = _.reduce(obj, function(boo, num){
 
-        if( iterator(num) != boo ) { // don't using !== for 1 equal to boolean true
+        if( iterator(num) != boo ) { // not using !== for 1 equal to boolean true
           return false;
         }
         return boo;
@@ -266,10 +266,22 @@ var _ = {};
     return result;
   };
 
+
   // Determine whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
   _.any = function(obj, iterator) {
     // TIP: re-use every() here
+    if(iterator === undefined){
+      iterator = function(n){
+        return n;
+      }
+    }
+
+    var result = _.every(obj, function(num){
+      //console.log(iterator(num));
+    });
+
+    return result;
   };
 
 
@@ -290,6 +302,13 @@ var _ = {};
   //   }); // obj1 now contains key1, key2, key3 and bla
   //
   _.extend = function(obj) {
+    var length = arguments.length;
+
+
+
+    _.each(obj,function(i){
+      console.log(obj[length-i]);
+    });
   };
 
   // Like extend, but doesn't ever overwrite a key that already
@@ -332,6 +351,8 @@ var _ = {};
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
+    console.log(func(arguments));
+    return func.apply(this,arguments);
   };
 
   // Delays a function for the given number of milliseconds, and then calls
@@ -341,6 +362,16 @@ var _ = {};
   // parameter. For example _.delay(someFunction, 500, 'a', 'b') will
   // call someFunction('a', 'b') after 500ms
   _.delay = function(func, wait) {
+
+    var args = [].slice.call(arguments,2), // convert to array, grab 3rd & 4th arguments
+        timer; 
+
+    timer = setTimeout(function() {
+
+      return func.apply(this, args); // apply = array
+      clearTimeout(timer);
+
+    }, wait);
   };
 
 
