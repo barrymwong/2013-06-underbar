@@ -3,7 +3,7 @@
 
 var returnArguments = function(){ return arguments; };
 
-
+/*
 
 describe("last", function() {
   it("should pull the last element from an array", function() {
@@ -203,7 +203,7 @@ describe("invoke", function() {
   });
 });
 
-/*
+
 
 describe("invoke with function reference", function() {
   it("should sort the first array", function() {
@@ -218,6 +218,8 @@ describe("invoke with function reference", function() {
     expect(result[1]).to.eql([1, 2, 3]);
   });
 });
+
+*/
 
 describe("reduce", function() {
   it("should be able to sum up an array", function() {
@@ -282,6 +284,9 @@ describe("every", function() {
     expect(_.every([undefined, undefined, undefined], getValue)).to.equal(false);
   });
 });
+
+
+
 
 describe("any", function() {
   var nativeSome = Array.prototype.some;
@@ -458,10 +463,20 @@ describe("delay", function() {
 
 describe("shuffle", function() {
   it("should not modify the original object", function() {
-    var numbers = _.range(10);
+    // _.range does not exist in any of the js files
+    // var numbers = _.range(10); 
+
+    var numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    // shows array correctly
+    // console.log(numbers); 
+
     var shuffled = _.shuffle(numbers);
+    // array is empty, why???
+    // console.log(numbers); 
 
     expect(shuffled.sort()).to.eql(numbers);
+    // this works:
+    // expect(shuffled.sort()).to.eql([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
   });
 });
 
@@ -564,4 +579,4 @@ describe("difference", function() {
   });
 });
 
-*/
+

@@ -382,7 +382,6 @@ var _ = {};
   // parameter. For example _.delay(someFunction, 500, 'a', 'b') will
   // call someFunction('a', 'b') after 500ms
   _.delay = function(func, wait) {
-
     var args = [].slice.call(arguments,2), // convert to array, grab 3rd & 4th arguments
         timer; 
 
@@ -400,12 +399,20 @@ var _ = {};
    */
 
   // Shuffle an array.
-  // There's a Fisher-Yates technique out there
-
+  // Fisher-Yates also made a shuffle function, but I didn't use it.
   _.shuffle = function(obj) {
-    var max = obj.length
-    console.log( Math.floor( Math.random() * max ) );
-    return obj;
+    var newArr = new Array(),
+        i = 0;
+
+    while (i < 100 && obj.length > 0) {
+      var rand = Math.floor( Math.random() * obj.length ), // 0 to 9
+          splice = obj.splice(rand,1);
+
+      newArr.push(+splice);
+      i++;
+    }
+
+    return newArr;
   };
 
   /* (End of pre-course curriculum) */
