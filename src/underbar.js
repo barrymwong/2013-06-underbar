@@ -277,8 +277,13 @@ var _ = {};
       }
     }
 
-    var result = _.every(obj, function(num){
-      //console.log(iterator(num));
+    // do all elements within item match?
+    //console.log( _.every(obj, function(num){}) );
+    var result = !_.every(obj, function(num){ 
+
+      // does each individual item match?
+      // console.log(iterator(num));
+      return !iterator(num);
     });
 
     return result;
@@ -312,7 +317,8 @@ var _ = {};
     }
 
     for(var i = 0; i<arguments.length; i++){
-      result = concat(result, arguments[i]);
+      // get arguments
+      result = concat(obj, arguments[i]);
     }
 
     return result;
@@ -321,6 +327,25 @@ var _ = {};
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   _.defaults = function(obj) {
+    var result = {};
+
+    function concat(obj1, obj2){
+      for(var key in obj2){
+
+        // check for property key
+        if( !obj1.hasOwnProperty(key) ) {
+          obj1[key] = obj2[key];
+        }
+      }
+      return obj1;
+    }
+
+    for(var i = 0; i<arguments.length; i++){
+      // get arguments
+      result = concat(obj, arguments[i]);
+    }
+
+    return result;
   };
 
 
@@ -358,21 +383,19 @@ var _ = {};
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
-    var args = [].slice.call(arguments),
-        memo = {},
-        result;
+    // http://addyosmani.com/blog/faster-javascript-memoization/
+    var memo = {};
 
-    if(args in memo){
-      result = memo[args];
+    return function(){
+      if(arguments in memo){
+        return memo.arguments;
 
-    } else {
-      memo[args] = func.apply(this, args)
-      result = memo[args];
+      } else {
+        memo.arguments = func.apply(this,arguments);
+        return memo.arguments;
+        
+      }
     }
-
-
-
-    return result;
   };
 
   // Delays a function for the given number of milliseconds, and then calls

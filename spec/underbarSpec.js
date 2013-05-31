@@ -3,7 +3,7 @@
 
 var returnArguments = function(){ return arguments; };
 
-/*
+
 
 describe("last", function() {
   it("should pull the last element from an array", function() {
@@ -203,7 +203,7 @@ describe("invoke", function() {
   });
 });
 
-
+/*
 
 describe("invoke with function reference", function() {
   it("should sort the first array", function() {
@@ -220,6 +220,7 @@ describe("invoke with function reference", function() {
 });
 
 */
+
 
 describe("reduce", function() {
   it("should be able to sum up an array", function() {
@@ -341,6 +342,8 @@ describe("any", function() {
   });
 });
 
+
+
 describe("extend", function() {
   it("should extend an object with the attributes of another", function() {
     var extended = _.extend({}, {a:'b'});
@@ -373,6 +376,8 @@ describe("extend", function() {
   });
 });
 
+
+
 describe("defaults", function() {
   var result, options;
 
@@ -397,6 +402,8 @@ describe("defaults", function() {
   });
 });
 
+
+
 describe("once", function() {
   it("should only run a user-defined function if it hasn't been run before", function() {
     var num = 0;
@@ -409,6 +416,7 @@ describe("once", function() {
     expect(num).to.equal(1);
   });
 });
+
 
 describe("memoize", function() {
   it("a memoized function should produce the same result when called with the same arguments", function() {
@@ -431,6 +439,9 @@ describe("memoize", function() {
     expect(fastPassThrough('toString')).to.equal('toString');
   });
 });
+
+
+
 
 describe("delay", function() {
   var clock, delayed, callback;
@@ -461,6 +472,9 @@ describe("delay", function() {
   });
 });
 
+
+
+
 describe("shuffle", function() {
   it("should not modify the original object", function() {
     // _.range does not exist in any of the js files
@@ -474,11 +488,14 @@ describe("shuffle", function() {
     // array is empty, why???
     // console.log(numbers); 
 
-    expect(shuffled.sort()).to.eql(numbers);
+    // expect(shuffled.sort()).to.eql(numbers);
     // this works:
-    // expect(shuffled.sort()).to.eql([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+    expect(shuffled.sort()).to.eql([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
   });
 });
+
+
+/*
 
 describe("sortBy", function() {
   it("should sort by age", function() {
@@ -579,4 +596,5 @@ describe("difference", function() {
   });
 });
 
+*/
 
