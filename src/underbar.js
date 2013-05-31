@@ -302,13 +302,20 @@ var _ = {};
   //   }); // obj1 now contains key1, key2, key3 and bla
   //
   _.extend = function(obj) {
-    var length = arguments.length;
+    var result = {};
 
+    function concat(obj1, obj2){
+      for(var key in obj2){
+        obj1[key] = obj2[key];
+      }
+      return obj1;
+    }
 
+    for(var i = 0; i<arguments.length; i++){
+      result = concat(result, arguments[i]);
+    }
 
-    _.each(obj,function(i){
-      console.log(obj[length-i]);
-    });
+    return result;
   };
 
   // Like extend, but doesn't ever overwrite a key that already
@@ -351,8 +358,21 @@ var _ = {};
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
-    console.log(func(arguments));
-    return func.apply(this,arguments);
+    var args = [].slice.call(arguments),
+        memo = {},
+        result;
+
+    if(args in memo){
+      result = memo[args];
+
+    } else {
+      memo[args] = func.apply(this, args)
+      result = memo[args];
+    }
+
+
+
+    return result;
   };
 
   // Delays a function for the given number of milliseconds, and then calls
@@ -380,7 +400,12 @@ var _ = {};
    */
 
   // Shuffle an array.
+  // There's a Fisher-Yates technique out there
+
   _.shuffle = function(obj) {
+    var max = obj.length
+    console.log( Math.floor( Math.random() * max ) );
+    return obj;
   };
 
   /* (End of pre-course curriculum) */
