@@ -192,8 +192,9 @@ var _ = {};
   _.invoke = function(list, methodName) {
     var newArr = [];
 
-    _.each(list, function(i){
-        newArr[newArr.length] = i[methodName]();
+    _.each(list, function(item){
+        methodName = item[methodName] ? item[methodName] : methodName;
+        newArr[newArr.length] = methodName.call(item);
     });
 
     return newArr;
@@ -223,11 +224,8 @@ var _ = {};
     // stores result of last loop
     result = initialValue;
 
-    _.each(obj, function(i){
-
-      //console.log(obj + ' | ' + i);
-
-      result = iterator(result, i);
+    _.each(obj, function(item){
+      result = iterator(result, item);
     });
 
     return result;
@@ -393,7 +391,7 @@ var _ = {};
       } else {
         memo.arguments = func.apply(this,arguments);
         return memo.arguments;
-        
+
       }
     }
   };
@@ -409,7 +407,6 @@ var _ = {};
         timer; 
 
     timer = setTimeout(function() {
-
       return func.apply(this, args); // apply = array
       clearTimeout(timer);
 
@@ -422,20 +419,26 @@ var _ = {};
    */
 
   // Shuffle an array.
-  // Fisher-Yates also made a shuffle function, but I didn't use it.
   _.shuffle = function(obj) {
-    var newArr = new Array(),
-        i = 0;
+    var leng = obj.length,
+        item = leng;
 
-    while (i < 100 && obj.length > 0) {
-      var rand = Math.floor( Math.random() * obj.length ), // 0 to 9
-          splice = obj.splice(rand,1);
+    while (item--) {
+      var rand = parseInt(Math.random() * leng),
+          temp = obj[item];
 
-      newArr.push(+splice);
-      i++;
+          console.log(temp);
+
+      obj[item] = obj[rand];
+      //console.log(obj[item]);
+
+      obj[rand] = temp;
+      //console.log(obj[rand]);
+
+      //console.log(obj);
     }
 
-    return newArr;
+    return obj;
   };
 
   /* (End of pre-course curriculum) */
