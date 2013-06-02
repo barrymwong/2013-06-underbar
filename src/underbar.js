@@ -269,7 +269,7 @@ var _ = {};
   // provided, provide a default one
   _.any = function(obj, iterator) {
     // TIP: re-use every() here
-    if(iterator === undefined){
+    if(!iterator){
       iterator = function(n){
         return n;
       }
