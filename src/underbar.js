@@ -148,7 +148,7 @@ var _ = {};
       if(pass === 1){
         newArr.push(i);
       }
-      row++
+      row++;
       pass = 1;
 
     });
@@ -389,7 +389,7 @@ var _ = {};
         return memo.arguments;
 
       } else {
-        memo.arguments = func.apply(this,arguments);
+        memo.arguments = func.apply(this, arguments);
         return memo.arguments;
 
       }
@@ -420,23 +420,23 @@ var _ = {};
 
   // Shuffle an array.
   _.shuffle = function(obj) {
-    var leng = obj.length,
-        item = leng;
+    // Fisher-Yates shuffle:
+    // Travel the array in reverse by going up. Swap the current 
+    // index with a random item that is less than current index
 
-    while (item--) {
-      var rand = parseInt(Math.random() * leng),
-          temp = obj[item];
+    var index = obj.length,
+        rand, temp;
 
-          console.log(temp);
+    while(index) {
+      rand = Math.floor( Math.random() * index-- ); // index = max value
 
-      obj[item] = obj[rand];
-      //console.log(obj[item]);
-
-      obj[rand] = temp;
-      //console.log(obj[rand]);
-
-      //console.log(obj);
+      // swap indexes
+      temp = obj[index]; // remember index value
+      obj[index] = obj[rand]; // replace index value with random
+      obj[rand] = temp; // replace random with remembered index value
     }
+
+    console.log(obj);
 
     return obj;
   };
