@@ -29,6 +29,10 @@ describe("last", function() {
 
 });
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9ebdcdd273049f78e557fe97c42e850669174145
 
 describe("first", function() {
   it("should be able to pull out the first element of an array", function() {
@@ -49,7 +53,10 @@ describe("first", function() {
 });
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9ebdcdd273049f78e557fe97c42e850669174145
 describe("each", function() {
   it("should provide value and iteration count", function() {
     var letters = ['a', 'b', 'c'];
@@ -401,9 +408,12 @@ describe("defaults", function() {
     expect(options.word).to.equal("word");
   });
 });
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 9ebdcdd273049f78e557fe97c42e850669174145
 describe("once", function() {
   it("should only run a user-defined function if it hasn't been run before", function() {
     var num = 0;
@@ -475,6 +485,7 @@ describe("delay", function() {
 
 describe("shuffle", function() {
   it("should not modify the original object", function() {
+<<<<<<< HEAD
     // _.range does not exist in any of the js files
     // var numbers = _.range(10); 
 
@@ -482,6 +493,9 @@ describe("shuffle", function() {
     // shows array correctly
     // console.log(numbers); 
 
+=======
+    var numbers = [1,2,3,4,5,6,7,8,9];
+>>>>>>> 9ebdcdd273049f78e557fe97c42e850669174145
     var shuffled = _.shuffle(numbers);
     // array is empty, why???
     // console.log(numbers); 
@@ -491,10 +505,14 @@ describe("shuffle", function() {
     // expect(shuffled.sort()).to.eql([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
   });
 });
+<<<<<<< HEAD
 
 
 /*
 
+=======
+/*
+>>>>>>> 9ebdcdd273049f78e557fe97c42e850669174145
 describe("sortBy", function() {
   it("should sort by age", function() {
     var people = [{name : 'curly', age : 50}, {name : 'moe', age : 30}];
