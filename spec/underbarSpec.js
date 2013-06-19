@@ -24,7 +24,7 @@ describe("last", function() {
 
 });
 
-/*
+
 
 describe("first", function() {
   it("should be able to pull out the first element of an array", function() {
@@ -43,6 +43,7 @@ describe("first", function() {
   });
 
 });
+
 
 describe("each", function() {
   it("should provide value and iteration count", function() {
@@ -358,7 +359,6 @@ describe("defaults", function() {
     expect(options.word).to.equal("word");
   });
 });
-
 describe("once", function() {
   it("should only run a user-defined function if it hasn't been run before", function() {
     var num = 0;
@@ -425,13 +425,13 @@ describe("delay", function() {
 
 describe("shuffle", function() {
   it("should not modify the original object", function() {
-    var numbers = _.range(10);
+    var numbers = [1,2,3,4,5,6,7,8,9];
     var shuffled = _.shuffle(numbers);
 
     expect(shuffled.sort()).to.eql(numbers);
   });
 });
-
+/*
 describe("sortBy", function() {
   it("should sort by age", function() {
     var people = [{name : 'curly', age : 50}, {name : 'moe', age : 30}];
